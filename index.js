@@ -54,8 +54,9 @@ app.post("/v4710_player/emotes/character/update", (req, res) => {
         if (!Array.isArray(emotes)) {
             return res.status(400).send({ error: 'Invalid emotes data' });
         }
-        emotes = [...emotes.slice(0, 8), ...Array(8).fill(null)].slice(0, 8);
-        dbJson.Skins.EquippedEmotes = emotes;
+        
+        let newemotes = [...emotes.slice(0, 8), ...Array(8).fill(null)].slice(0, 8);
+        dbJson.Skins.EquippedEmotes = newemotes;
         let dbJsonStr = JSON.stringify(dbJson, null, 2);
         fs.writeFileSync('db.json', dbJsonStr);
         res.status(200).send('true');
