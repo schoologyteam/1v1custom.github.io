@@ -1,6 +1,8 @@
-var express = require("express");
-var app = express();
-var fs = require('fs')
+const express = require('express');
+const fs = require('fs');
+const bodyParser = require('body-parser');
+const app = express();
+app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 app.get("/v4710_remoteConfig/fetch",(req,res)=>{
     fs.readFile('./RemoteConfig.json', 'utf8', (err, data) => {
         if (err) {
@@ -26,327 +28,7 @@ app.get("/v4710_player/getRegionInfo",(req,res)=>{
 })
 app.get("/v4710_player/login",(req,res)=>{
     res.json(
-        {
-            "GeneralData": {
-              "ID": "randomidlol",
-              "Nickname": "user",
-              "Country": "",
-              "Region": "",
-              "IsMigrated": false,
-              "BoxRating": 0,
-              "DuosRating": 0,
-              "Elo": 1351,
-              "OpenskillModel": {
-                "Ranking": 50.85468753378335,
-                "RatingData": {
-                  "sigma": 3.55172646878418,
-                  "mu": 61.509866940135886
-                }
-              },
-              "SoftCurrency": 0,
-              "CustomRating": 974,
-              "HardCurrency": 11805,
-              "LoLTokens": 51,
-              "CreatedAt": "2023-08-28T14:11:35.913Z",
-              "Logins": {
-                "LastLoginTime": 1722355479468,
-                "CurrentLoginTime": 1722355917178,
-                "TotalLogins": 239,
-                "DailyConsecutiveLogins": 1
-              },
-              "Stats": {
-                "TotalGamesPlayed": 420,
-                "TotalKills": 420,
-                "TotalDeaths": 0,
-                "Victories": {
-                  "Showdown": 9999,
-                  "Showdown_Duos": 9999,
-                  "GrandBattleRoyale": 9999,
-                  "GrandBattleRoyale_Duos": 9999,
-                  "1v1_Competitive_Migration": 9999,
-                  "1v1_Migration": 9999,
-                  "1v1_Clash": 9999
-                },
-                "Defeats": {
-                  "Showdown": 0,
-                  "GrandBattleRoyale": 0,
-                  "GrandBattleRoyale_Duos": 0,
-                  "1v1_Competitive_Migration": 0,
-                  "1v1_Migration": 0
-                },
-                "Ties": {
-                  "1v1_Competitive_Migration": 0,
-                  "1v1_Migration": 0
-                },
-                "ConsecutiveWins": 5
-              },
-              "PrivacySettings": {
-                "HasSeenTailoredAdsPopup": false,
-                "HasAcceptedTailoredAds": false
-              },
-              "Premium": {
-                "AdsDisabled": false,
-                "LTV": 0,
-                "DidMigrateAdsDisabled": true
-              },
-              "NonconsumablePacks": [],
-              "XP": 99999999,
-              "RVData": {
-                "Watched": 0,
-                "CurrentSkin": "",
-                "LastRvSkinTime": "1970-01-01T00:00:00.000Z"
-              },
-              "MatchHistory": {
-                "MatchSampleTimestamp": 1722350646938,
-                "MatchesSinceSample": 1,
-                "Exceeds": 0
-              },
-              "FriendInviteLink": {},
-              "AgeGate": {
-                "IsUnderage": false,
-                "GuardianPermissionGranted": [],
-                "ShouldShowUpdatedPermissionsPopup": false
-              }
-            },
-            "Settings": {
-              "Controls": {
-                "WebGL_MusicVolumeSlider": "0"
-              },
-              "SettingsVersion": 2
-            },
-            "Skins": {
-              "EquippedChampionSkins": {},
-              "CharacterSkins": [
-                "lol.1v1.playerskins.pack.quick.default"
-              ],
-              "EquippedWeaponSkins": [
-                "lol.1v1.weaponskins.melee.pickaxe.default",
-              ],
-              "EquippedCharacterSkin": "lol.1v1.playerskins.pack.quick.default",
-              "OwnedEmotes": [
-                "lol.1v1.playeremotes.pack.1",
-                "lol.1v1.playeremotes.pack.2",
-                "lol.1v1.playeremotes.pack.3",
-                "lol.1v1.playeremotes.pack.4",
-                "lol.1v1.playeremotes.pack.5",
-                "lol.1v1.playeremotes.pack.6",
-                "lol.1v1.playeremotes.pack.7",
-                "lol.1v1.playeremotes.pack.8",
-                "lol.1v1.playeremotes.pack.9",
-                "lol.1v1.playeremotes.pack.10",
-                "lol.1v1.playeremotes.pack.11",
-                "lol.1v1.playeremotes.pack.12",
-                "lol.1v1.playeremotes.pack.13",
-                "lol.1v1.playeremotes.pack.14",
-                "lol.1v1.playeremotes.pack.15",
-                "lol.1v1.playeremotes.pack.16",
-                "lol.1v1.playeremotes.pack.17",
-                "lol.1v1.playeremotes.pack.18",
-                "lol.1v1.playeremotes.pack.19",
-                "lol.1v1.playeremotes.pack.20",
-                "lol.1v1.playeremotes.pack.21",
-                "lol.1v1.playeremotes.pack.22"
-              ],
-              "EquippedEmotes": [
-                "lol.1v1.playeremotes.pack.1",
-
-                null,
-                null
-              ],
-              "WeaponSkins": [
-                "lol.1v1.weaponskins.melee.pickaxe.default",
-                "lol.1v1.weaponskins.melee.pickaxe.candycane"
-              ],
-              "CompensationVersion": 1
-            },
-            "BattlePass": {
-              "Seasons": {
-                
-              },
-              "XPBankData": {
-                "LastXPRefreshTimestamp": 1696783346662,
-                "XPLeft": -480
-              }
-            },
-            "TrophyRoad": {
-              "Seasons": {}
-            },
-            "RankRoad": {
-              "Seasons": {
-              },
-              "AccountRoad": {
-                "XP": 0,
-                "HighestXP": 0,
-                "AvailableRewards": [],
-                "ClaimedRewards": [
-                  
-                ]
-              }
-            },
-            "DailyRewards": {
-              "Rewards": [],
-              "InfluencerCampaign": {
-                "LastSkinClaimTimestamp": 0
-              }
-            },
-            "Equipment": {
-              "Equipment": {
-                "lol.1v1.weapons.pump_shotgun": {
-                  "Level": 1
-                },
-                "lol.1v1.weapons.scar": {
-                  "Level": 1
-                },
-                "lol.1v1.armors.body.basic": {
-                  "Level": 2
-                },
-                "lol.1v1.weapons.military_sniper": {
-                  "Level": 5
-                },
-                "lol.1v1.armors.body.recovery": {
-                  "Level": 1
-                },
-                "lol.1v1.armors.body.medic": {
-                  "Level": 1
-                },
-                "lol.1v1.weapons.9mmpistol": {
-                  "Level": 1
-                }
-              },
-              "Loadouts": [
-                {
-                  "LoadoutName": "",
-                  "EquippedArmor": [
-                    ""
-                  ],
-                  "EquippedWeapons": [
-                    "lol.1v1.weapons.scar",
-                    "lol.1v1.weapons.pump_shotgun",
-                    "lol.1v1.weapons.military_sniper"
-                  ],
-                  "EquippedBuildsMaterial": [
-                    ""
-                  ]
-                }
-              ],
-              "EquippedLoadout": 0,
-              "AvailableLoadouts": 2,
-              "AvailableWeaponSlots": 3,
-              "AvailableArmorSlots": 1,
-              "UpgradeCards": {
-                "lol.1v1.weapons.scar": 99,
-                "lol.1v1.armors.body.basic": 222,
-                "lol.1v1.armors.body.medic": 28,
-                "lol.1v1.armors.body.recovery": 49,
-                "lol.1v1.weapons.pump_shotgun": 205,
-                "lol.1v1.weapons.9mmpistol": 38,
-                "lol.1v1.weapons.military_sniper": 39
-              }
-            },
-            "Inventory": {
-              "LootBoxes": [
-                {
-                  "LootBoxId": "lol.1v1.lolbox.capsule_silver_plus",
-                  "LootBoxLevel": 4,
-                  "LootBoxGuid": "ba7023b8-3220-794d-6bc6-393b744b4103"
-                },
-                {
-                  "LootBoxId": "lol.1v1.lolbox.capsule_silver_plus",
-                  "LootBoxLevel": 2,
-                  "LootBoxGuid": "d44bb123-f186-8d34-cb1d-18feeeaba3eb"
-                },
-                {
-                  "LootBoxId": "lol.1v1.lolbox.capsule_silver_plus",
-                  "LootBoxLevel": 4,
-                  "LootBoxGuid": "79073865-d247-bfda-fd31-0fc0144ecae6"
-                }
-              ],
-              "Spins": [],
-              "LootBoxesQueue": [],
-              "MaxLootBoxesQueues": 1,
-              "CachedRewards": {}
-            },
-            "Challenges": {
-              "CurrentFetchTime": 1722355200000,
-              "LastFetchTime": 1722355200000,
-              "LastDailyBonusClaimTime": 1697385600000,
-              "CurrentStreak": 0,
-              "DidClaimStreakBonus": false,
-              "DidClaimDailyBonus": false,
-              "DailyChallengesData": {
-              },
-              "SeasonalChallengesData": {
-              }
-            },
-            "Offers": {
-              "Tier": 0,
-              "Timestamp": "2023-08-28T14:11:36.082Z",
-              "Offers": {
-              }
-            },
-            "Leaderboards": {
-              "Nickname": "",
-              "Leaderboards": {},
-              "IsBlacklisted": false
-            },
-            "Subscriptions": {
-              "Subscriptions": {}
-            },
-            "ProgressionEvents": {
-              "Events": {}
-            },
-            "UserRV": {
-              "BoxTimeCutter": {
-                "LastRefreshTime": 1722355917571,
-                "RVsLeft": 3
-              },
-              "HighValueRVOffer": {
-                "LastRefreshTime": 1722355917571,
-                "RVsLeft": 3
-              }
-            },
-            "Champions": {
-              "OwnedChampions": {
-                "lol.1v1.champions.quick": {
-                  "Level": 1
-                },
-                "lol.1v1.champions.tron": {
-                  "Level": 0
-                },
-                "lol.1v1.champions.jade": {
-                  "Level": 0
-                },
-                "lol.1v1.champions.frosty": {
-                  "Level": 0
-                }
-              },
-              "SelectedChampion": "lol.1v1.champions.frosty",
-              "ChampionShards": {
-                "lol.1v1.champions.quick": 120,
-                "lol.1v1.champions.tron": 187,
-                "lol.1v1.champions.jade": 146
-              }
-            },
-            "DailyModes": {
-              "DailyModes": {}
-            },
-            "UserAlbumsData": {
-              "UserAlbums": {
-                "lol.1v1.album.dragon_lab": {
-                  "Occurences": {
-                    "wowie2222": {
-                      "ClaimedPrize": false,
-                      "UserSets": {
-                        
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "PsfToken": "",
-            "DevicePerformanceTier": 0
-          }
+        JSON.parse(fs.readFileSync('db.json', 'utf-8'))
     )
 })
 app.get("/v4710_userSettings/time",(req,res)=>{
@@ -364,4 +46,21 @@ app.get("/v4710_friends",(req,res)=>{
 app.get("/v4710_friends/friendData",(req,res)=>{
     res.json({});
 })
+app.post("/v4710_player/emotes/character/update", (req, res) => {
+    try {
+        let db = fs.readFileSync('db.json', 'utf-8');
+        let dbJson = JSON.parse(db);
+        const emotes = JSON.parse(req.body.emotes).data;
+        if (!Array.isArray(emotes)) {
+            return res.status(400).send({ error: 'Invalid emotes data' });
+        }
+        dbJson.Skins.EquippedEmotes = emotes;
+        let dbJsonStr = JSON.stringify(dbJson, null, 2);
+        fs.writeFileSync('db.json', dbJsonStr);
+        res.status(200).send('true');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ error: 'Failed to update emotes' });
+    }
+});
 app.listen(80);
