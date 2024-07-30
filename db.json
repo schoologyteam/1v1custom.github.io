@@ -286,25 +286,48 @@
   },
   "Champions": {
     "OwnedChampions": {
-      "lol.1v1.champions.quick": {
-        "Level": 1
-      },
       "lol.1v1.champions.tron": {
         "Level": 0
       },
       "lol.1v1.champions.jade": {
         "Level": 0
       },
+      "lol.1v1.champions.caesar": {
+        "Level": 0
+      },
       "lol.1v1.champions.frosty": {
+        "Level": 0
+      },
+      "lol.1v1.champions.shadow": {
+        "Level": 0
+      },
+      "lol.1v1.champions.magma": {
+        "Level": 0
+      },
+      "lol.1v1.champions.sentinel": {
+        "Level": 0
+      },
+      "lol.1v1.champions.quick": {
+        "Level": 0
+      },
+      "lol.1v1.champions.violet": {
+        "Level": 0
+      },
+      "lol.1v1.champions.fang": {
+        "Level": 0
+      },
+      "lol.1v1.champions.poseidon": {
+        "Level": 0
+      },
+      "lol.1v1.champions.pyro": {
+        "Level": 0
+      },
+      "lol.1v1.champions.electro": {
         "Level": 0
       }
     },
-    "SelectedChampion": "lol.1v1.champions.jade",
-    "ChampionShards": {
-      "lol.1v1.champions.quick": 120,
-      "lol.1v1.champions.tron": 187,
-      "lol.1v1.champions.jade": 146
-    }
+    "SelectedChampion": "lol.1v1.champions.fang",
+    "ChampionShards": {}
   },
   "DailyModes": {
     "DailyModes": {}
