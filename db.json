@@ -92,7 +92,7 @@
       "lol.1v1.playerskins.pack.quick.default"
     ],
     "EquippedWeaponSkins": [
-      "lol.1v1.weaponskins.melee.pickaxe.default"
+      "lol.1v1.weaponskins.melee.pickaxe.fang"
     ],
     "EquippedCharacterSkin": "lol.1v1.playerskins.pack.quick.default",
     "OwnedEmotes": [
@@ -120,13 +120,29 @@
       "lol.1v1.playeremotes.pack.22"
     ],
     "EquippedEmotes": [
-      "lol.1v1.playeremotes.pack.1",
-      "lol.1v1.playeremotes.pack.14",
-      "lol.1v1.playeremotes.pack.3"
+      "lol.1v1.playeremotes.pack.2",
+      null,
+      "lol.1v1.playeremotes.pack.18",
+      null,
+      null,
+      null,
+      null,
+      null
     ],
     "WeaponSkins": [
       "lol.1v1.weaponskins.melee.pickaxe.default",
-      "lol.1v1.weaponskins.melee.pickaxe.candycane"
+      "lol.1v1.weaponskins.melee.pickaxe.candycane",
+      "lol.1v1.weaponskins.melee.pickaxe.scifihammer",
+      "lol.1v1.weaponskins.melee.pickaxe.warhammer",
+      "lol.1v1.weaponskins.melee.pickaxe.chicken_leg",
+      "lol.1v1.weaponskins.melee.pickaxe.skullaxe",
+      "lol.1v1.weaponskins.melee.pickaxe.spikesaxe",
+      "lol.1v1.weaponskins.melee.pickaxe.gamelegends_2",
+      "lol.1v1.weaponskins.melee.pickaxe.candycane",
+      "lol.1v1.weaponskins.melee.pickaxe.darkaxe",
+      "lol.1v1.weaponskins.melee.pickaxe.christmas_present",
+      "lol.1v1.weaponskins.melee.pickaxe.gamelegends_1",
+      "lol.1v1.weaponskins.melee.pickaxe.fang"
     ],
     "CompensationVersion": 1
   },
