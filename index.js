@@ -144,6 +144,8 @@ app.get("/v4710_player/updateProgressAndStats",(req,res)=>{
     dbJson.GeneralData.Stats.TotalKills+=matchSummary.KillCount;
     dbJson.GeneralData.Stats.TotalDeaths+=matchSummary.DeathCount;
     dbJson.RankRoad.AccountRoad.XP+=trophies;
+    if(dbJson.RankRoad.AccountRoad.XP > dbJson.RankRoad.AccountRoad.HighestXP)
+        dbJson.RankRoad.AccountRoad.HighestXP = dbJson.RankRoad.AccountRoad.XP;
     let dbJsonStr = JSON.stringify(dbJson, null, 2);
     fs.writeFileSync('db.json', dbJsonStr);
     res.json(dbJson)
