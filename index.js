@@ -63,4 +63,21 @@ app.post("/v4710_player/emotes/character/update", (req, res) => {
         res.status(500).send({ error: 'Failed to update emotes' });
     }
 });
+app.post("/v4710_player/skins/character/equip/weapon", (req, res) => {
+    try {
+        let db = fs.readFileSync('db.json', 'utf-8');
+        let dbJson = JSON.parse(db);
+        const pickaxe = JSON.parse(req.body.ids);
+        if (!Array.isArray(emotes)) {
+            return res.status(400).send({ error: 'Invalid pickaxe data' });
+        }
+        dbJson.Skins.EquippedWeaponSkins = pickaxe;
+        let dbJsonStr = JSON.stringify(dbJson, null, 2);
+        fs.writeFileSync('db.json', dbJsonStr);
+        res.status(200).send('true');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ error: 'Failed to update pickaxe' });
+    }
+});
 app.listen(80);
