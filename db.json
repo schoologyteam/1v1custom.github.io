@@ -27,20 +27,20 @@
       "DailyConsecutiveLogins": 1
     },
     "Stats": {
-      "TotalGamesPlayed": 420,
-      "TotalKills": 420,
+      "TotalGamesPlayed": 0,
+      "TotalKills": 0,
       "TotalDeaths": 0,
       "Victories": {
-        "Showdown": 9999,
-        "Showdown_Duos": 9999,
-        "GrandBattleRoyale": 9999,
-        "GrandBattleRoyale_Duos": 9999,
-        "1v1_Competitive_Migration": 9999,
-        "1v1_Migration": 9999,
-        "1v1_Clash": 9999
+        "Showdown": 1,
+        "Showdown_Duos": 0,
+        "GrandBattleRoyale": 0,
+        "GrandBattleRoyale_Duos": 0,
+        "1v1_Competitive_Migration": 0,
+        "1v1_Migration": 0,
+        "1v1_Clash": 0
       },
       "Defeats": {
-        "Showdown": 0,
+        "Showdown": 1,
         "GrandBattleRoyale": 0,
         "GrandBattleRoyale_Duos": 0,
         "1v1_Competitive_Migration": 0,
@@ -92,7 +92,7 @@
       "lol.1v1.playerskins.pack.quick.default"
     ],
     "EquippedWeaponSkins": [
-      "lol.1v1.weaponskins.melee.pickaxe.fang"
+      "lol.1v1.weaponskins.melee.pickaxe.chicken_leg"
     ],
     "EquippedCharacterSkin": "lol.1v1.playerskins.pack.quick.default",
     "OwnedEmotes": [
@@ -120,14 +120,14 @@
       "lol.1v1.playeremotes.pack.22"
     ],
     "EquippedEmotes": [
-      "lol.1v1.playeremotes.pack.2",
-      "lol.1v1.playeremotes.pack.16",
-      "lol.1v1.playeremotes.pack.18",
       "lol.1v1.playeremotes.pack.15",
-      "lol.1v1.playeremotes.pack.21",
-      "lol.1v1.playeremotes.pack.10",
+      "lol.1v1.playeremotes.pack.17",
+      "lol.1v1.playeremotes.pack.2",
       "lol.1v1.playeremotes.pack.14",
-      "lol.1v1.playeremotes.pack.12"
+      "lol.1v1.playeremotes.pack.12",
+      "lol.1v1.playeremotes.pack.16",
+      "lol.1v1.playeremotes.pack.13",
+      "lol.1v1.playeremotes.pack.1"
     ],
     "WeaponSkins": [
       "lol.1v1.weaponskins.melee.pickaxe.default",
@@ -159,7 +159,7 @@
   "RankRoad": {
     "Seasons": {},
     "AccountRoad": {
-      "XP": 0,
+      "XP": 50,
       "HighestXP": 0,
       "AvailableRewards": [],
       "ClaimedRewards": []

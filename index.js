@@ -1,8 +1,15 @@
 const express = require('express');
 const fs = require('fs');
 const bodyParser = require('body-parser');
+const { Console } = require('console');
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
+function calculateTrophies(placement, trophiesForFirstPlace, trophiesForFourteenthPlace, totalPlaces) {
+    if (placement < 1 || placement > totalPlaces) {
+        throw new Error("Placement is out of range.");
+    }
+    return trophiesForFirstPlace + Math.round((placement - 1) / (totalPlaces - 1) * (trophiesForFourteenthPlace - trophiesForFirstPlace));
+}
 app.get("/v4710_remoteConfig/fetch",(req,res)=>{
     fs.readFile('./RemoteConfig.json', 'utf8', (err, data) => {
         if (err) {
@@ -90,5 +97,55 @@ app.post("/v4710_champions/equip",(req,res)=>{
     let dbJsonStr = JSON.stringify(dbJson, null, 2);
     fs.writeFileSync('db.json', dbJsonStr);
     res.send("true");
+})
+app.get("/v4710_player/updateProgressAndStats",(req,res)=>{
+    let db = fs.readFileSync('db.json', 'utf-8');
+    let dbJson = JSON.parse(db);
+    const matchSummary = JSON.parse(req.query.matchSummary);
+    let trophies = calculateTrophies(matchSummary.Placement,20,4,16);
+    
+    if(matchSummary.ModeName == "Showdown_Duos")
+    {
+        trophies = trophies + matchSummary.KillCount + matchSummary.TeamKills;
+    }
+    if(matchSummary.ModeName == "Showdown")
+    {
+        trophies = trophies + matchSummary.KillCount;
+    }
+    console.log("Given "+trophies+" trophies to player")
+    if(matchSummary.MatchResult == "win")
+    {
+        if(matchSummary.ModeName == "Showdown_Duos")
+        {
+            dbJson.GeneralData.Stats.Victories.Showdown_Duos++;
+        }
+        if(matchSummary.ModeName == "Showdown")
+        {
+            dbJson.GeneralData.Stats.Victories.Showdown++;
+        }
+        if(matchSummary.ModeName == "1v1_Clash")
+        {
+            dbJson.GeneralData.Stats.Victories["1v1_Clash"]++;
+        }
+        
+    }
+    if(matchSummary.MatchResult != "win")
+        {
+            if(matchSummary.ModeName == "Showdown_Duos")
+            {
+                dbJson.GeneralData.Stats.Defeats.Showdown++;
+            }
+            if(matchSummary.ModeName == "Showdown")
+            {
+                dbJson.GeneralData.Stats.Defeats.Showdown++;
+            }
+
+        } 
+    dbJson.GeneralData.Stats.TotalKills+=matchSummary.KillCount;
+    dbJson.GeneralData.Stats.TotalDeaths+=matchSummary.DeathCount;
+    dbJson.RankRoad.AccountRoad.XP+=trophies;
+    let dbJsonStr = JSON.stringify(dbJson, null, 2);
+    fs.writeFileSync('db.json', dbJsonStr);
+    res.json(dbJson)
 })
 app.listen(80);
