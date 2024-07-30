@@ -81,4 +81,13 @@ app.post("/v4710_player/skins/character/equip/weapon", (req, res) => {
         res.status(500).send({ error: 'Failed to update pickaxe' });
     }
 });
+app.post("/v4710_champions/equip",(req,res)=>{
+    let db = fs.readFileSync('db.json', 'utf-8');
+    let dbJson = JSON.parse(db);
+    let champion = req.body.championId;
+    dbJson.Champions.SelectedChampion = champion;
+    let dbJsonStr = JSON.stringify(dbJson, null, 2);
+    fs.writeFileSync('db.json', dbJsonStr);
+    res.send("true");
+})
 app.listen(80);
