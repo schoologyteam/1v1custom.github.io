@@ -1,0 +1,253 @@
+[
+    {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.mystery_champion_rank_bronze_1"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.grenade_box_rank_bronze_2"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.mystery_champion_rank_silver_2"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.mega_rank_unranked"
+      },
+      {
+        "RewardType": "LOLTokens",
+        "Amount": 15,
+        "ProductID": "Tokens1"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.lite_rank_bronze_1"
+      },
+      {
+        "RewardType": "LOLCoins",
+        "Amount": 20,
+        "ProductID": "Coins1"
+      },
+      {
+        "RewardType": "LOLCoins",
+        "Amount": 20,
+        "ProductID": "Coins2"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.ultra_rank_bronze_2"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.lite_rank_bronze_2"
+      },
+      {
+        "RewardType": "LOLTokens",
+        "Amount": 15,
+        "ProductID": "Tokens2"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.ultra_rank_bronze_3"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.mega_rank_bronze_3"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.lite_rank_silver_1"
+      },
+      {
+        "RewardType": "LOLCoins",
+        "Amount": 60,
+        "ProductID": "Coins3"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.ultra_rank_silver_1"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.lite_rank_silver_2"
+      },
+      {
+        "RewardType": "LOLCoins",
+        "Amount": 80,
+        "ProductID": "Coins4"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.ultra_rank_silver_2"
+      },
+      {
+        "RewardType": "LOLTokens",
+        "Amount": 15,
+        "ProductID": "Tokens3"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.mega_rank_silver_3"
+      },
+      {
+        "RewardType": "LOLCoins",
+        "Amount": 100,
+        "ProductID": "Coins45"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.lite_rank_gold_1"
+      },
+      {
+        "RewardType": "LOLCoins",
+        "Amount": 120,
+        "ProductID": "Coins5"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.ultra_rank_gold_1"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.lite_rank_gold_2"
+      },
+      {
+        "RewardType": "LOLCoins",
+        "Amount": 140,
+        "ProductID": "Coins6"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.ultra_rank_gold_2"
+      },
+      {
+        "RewardType": "LOLTokens",
+        "Amount": 35,
+        "ProductID": "Tokens4"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.mega_rank_gold_3"
+      },
+      {
+        "RewardType": "LOLCoins",
+        "Amount": 160,
+        "ProductID": "Coins7"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.lite_rank_platinum_1"
+      },
+      {
+        "RewardType": "LOLCoins",
+        "Amount": 180,
+        "ProductID": "Coins8"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.mega_rank_platinum_1"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.ultra_rank_platinum_2"
+      },
+      {
+        "RewardType": "LOLCoins",
+        "Amount": 200,
+        "ProductID": "Coins9"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.lite_rank_platinum_2"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.ultra_rank_platinum_3"
+      },
+      {
+        "RewardType": "LOLTokens",
+        "Amount": 85,
+        "ProductID": "Tokens5"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.mega_rank_platinum_3"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.lite_rank_champion_1"
+      },
+      {
+        "RewardType": "LOLCoins",
+        "Amount": 300,
+        "ProductID": "Coins10"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.mega_rank_champion_1"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.lite_rank_champion_2"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.ultra_rank_champion_2"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.mega_rank_champion_2"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.ultra_rank_champion_3"
+      },
+      {
+        "RewardType": "LOLTokens",
+        "Amount": 175,
+        "ProductID": "Tokens6"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.mega_rank_champion_3"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.lite_rank_elite_1"
+      },
+      {
+        "RewardType": "LOLCoins",
+        "Amount": 500,
+        "ProductID": "Coins11"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.mega_rank_elite_1"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.lite_rank_elite_2"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.ultra_rank_elite_2"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.mega_rank_elite_2"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.ultra_rank_elite_3"
+      },
+      {
+        "RewardType": "LOLTokens",
+        "Amount": 350,
+        "ProductID": "Tokens7"
+      },
+      {
+        "RewardType": "Product",
+        "ProductID": "lol.1v1.lolbox.mega_rank_elite_3"
+      }
+]
