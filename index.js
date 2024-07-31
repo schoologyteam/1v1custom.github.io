@@ -3,7 +3,10 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 const { Console } = require('console');
 const app = express();
+var buffer = require('buffer/').Buffer;
+const database = require("./db.js")
 app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
+
 function calculateTrophies(placement, trophiesForFirstPlace, trophiesForFourteenthPlace, totalPlaces) {
     if (placement < 1 || placement > totalPlaces) {
         throw new Error("Placement is out of range.");
@@ -37,15 +40,18 @@ app.get("/v4710_challenges/getChallengesData",(req,res)=>{
 app.get("/v4710_player/getRegionInfo",(req,res)=>{
     res.json({"Country":"US","Region":"CA","AgeGateLimit":13,"HasAgeGate":true,"IsBlocked":false});
 })
-app.get("/v4710_player/login",(req,res)=>{
-    const info = JSON.parse(fs.readFileSync('db.json', 'utf-8'))
-    let dat = fs.readFileSync("AccountRoad.json");
-    const data2 = JSON.parse(dat);
-    info.RankRoad.AccountRoad.AvailableRewards = data2
-    res.json(
-        info
-    )
-})
+app.get("/v4710_player/login", (req, res) => {
+    const userid = buffer.from((req.headers['x-forwarded-for'] || req.socket.remoteAddress)+req.headers['Host']).toString('base64');;
+    database.getUserData(userid, (err, data) => {
+        if (err) {
+            res.status(500).json({ error: 'Server blew up...' });
+            return;
+        }
+        log(`User ${data.GeneralData.Nickname} has logged in`)
+        res.json(data);
+    });
+});
+
 app.get("/v4710_userSettings/time",(req,res)=>{
     res.send("\"Tue, 30 Jul 2024, 19:50:25\"");
 })
@@ -62,195 +68,236 @@ app.get("/v4710_friends/friendData",(req,res)=>{
     res.json({});
 })
 app.post("/v4710_player/emotes/character/update", (req, res) => {
-    try {
-        let db = fs.readFileSync('db.json', 'utf-8');
-        let dbJson = JSON.parse(db);
-        const emotes = JSON.parse(req.body.emotes).data;
-        if (!Array.isArray(emotes)) {
-            return res.status(400).send({ error: 'Invalid emotes data' });
+    const token = buffer.from((req.headers['x-forwarded-for'] || req.socket.remoteAddress)+req.headers['Host']).toString('base64');;
+    database.getUserData(token, (err, data) => {
+        if (err) {
+            res.status(500).send({ error: 'Failed to retrieve user data' });
+            return;
         }
-        
-        let newemotes = [...emotes.slice(0, 8), ...Array(8).fill(null)].slice(0, 8);
-        dbJson.Skins.EquippedEmotes = newemotes;
-        let dbJsonStr = JSON.stringify(dbJson, null, 2);
-        fs.writeFileSync('db.json', dbJsonStr);
-        res.status(200).send('true');
-        log(`User ${dbJson.GeneralData.Nickname} has updated their emotes`)
-    } catch (error) {
-        console.error(error);
-        res.status(500).send({ error: 'Failed to update emotes' });
-    }
+        try {
+            const emotes = JSON.parse(req.body.emotes).data;
+            if (!Array.isArray(emotes)) {
+                return res.status(400).send({ error: 'Invalid emotes data' });
+            }
+
+            let newemotes = [...emotes.slice(0, 8), ...Array(8).fill(null)].slice(0, 8);
+            data.Skins.EquippedEmotes = newemotes;
+
+            database.updateUserData(token, data, (err) => {
+                if (err) {
+                    res.status(500).send({ error: 'Failed to update emotes' });
+                    return;
+                }
+                res.status(200).send('true');
+                log(`User ${data.GeneralData.Nickname} has updated their emotes`);
+            });
+        } catch (error) {
+            console.error(error);
+            res.status(500).send({ error: 'Failed to update emotes' });
+        }
+    });
 });
 app.post("/v4710_player/skins/character/equip/weapon", (req, res) => {
-    try {
-        let db = fs.readFileSync('db.json', 'utf-8');
-        let dbJson = JSON.parse(db);
-        const pickaxe = JSON.parse(req.body.ids);
-        if (!Array.isArray(pickaxe)) {
-            return res.status(400).send({ error: 'Invalid pickaxe data' });
+    const token = buffer.from((req.headers['x-forwarded-for'] || req.socket.remoteAddress)+req.headers['Host']).toString('base64');;
+    database.getUserData(token, (err, data) => {
+        if (err) {
+            res.status(500).send({ error: 'Failed to retrieve user data' });
+            return;
         }
-        dbJson.Skins.EquippedWeaponSkins = pickaxe;
-        let dbJsonStr = JSON.stringify(dbJson, null, 2);
-        fs.writeFileSync('db.json', dbJsonStr);
-        res.status(200).send(req.body.ids);
-        
-        log(`User ${dbJson.GeneralData.Nickname} has updated their pickaxe`)
-    } catch (error) {
-        console.error(error);
-        res.status(500).send({ error: 'Failed to update pickaxe' });
-    }
-});
-app.post("/v4710_champions/equip",(req,res)=>{
-    let db = fs.readFileSync('db.json', 'utf-8');
-    let dbJson = JSON.parse(db);
-    let champion = req.body.championId;
-    dbJson.Champions.SelectedChampion = champion;
-    let dbJsonStr = JSON.stringify(dbJson, null, 2);
-    fs.writeFileSync('db.json', dbJsonStr);
-    res.send("true");
-})
-app.get("/v4710_player/updateProgressAndStats",(req,res)=>{
-    let db = fs.readFileSync('db.json', 'utf-8');
-    let dbJson = JSON.parse(db);
-    const matchSummary = JSON.parse(req.query.matchSummary);
-    let trophies = calculateTrophies(matchSummary.Placement,20,4,16);
-    
-    if(matchSummary.ModeName == "Showdown_Duos")
-    {
-        trophies = trophies + matchSummary.KillCount + matchSummary.TeamKills;
-    }
-    if(matchSummary.ModeName == "Showdown")
-    {
-        trophies = trophies + matchSummary.KillCount;
-    }
-    console.log("Given "+trophies+" trophies to player")
-    if(matchSummary.MatchResult == "win")
-    {
-        if(matchSummary.ModeName == "Showdown_Duos")
-        {
-            dbJson.GeneralData.Stats.Victories.Showdown_Duos++;
-        }
-        if(matchSummary.ModeName == "Showdown")
-        {
-            dbJson.GeneralData.Stats.Victories.Showdown++;
-        }
-        if(matchSummary.ModeName == "1v1_Clash")
-        {
-            dbJson.GeneralData.Stats.Victories["1v1_Clash"]++;
-        }
-        
-    }
-    if(matchSummary.MatchResult != "win")
-        {
-            if(matchSummary.ModeName == "Showdown_Duos")
-            {
-                dbJson.GeneralData.Stats.Defeats.Showdown++;
-            }
-            if(matchSummary.ModeName == "Showdown")
-            {
-                dbJson.GeneralData.Stats.Defeats.Showdown++;
-            }
 
-        } 
-    dbJson.GeneralData.Stats.TotalKills+=matchSummary.KillCount;
-    dbJson.GeneralData.Stats.TotalDeaths+=matchSummary.DeathCount;
-    dbJson.RankRoad.AccountRoad.XP+=trophies;
-    if(dbJson.RankRoad.AccountRoad.XP > dbJson.RankRoad.AccountRoad.HighestXP)
-        dbJson.RankRoad.AccountRoad.HighestXP = dbJson.RankRoad.AccountRoad.XP;
-    let dbJsonStr = JSON.stringify(dbJson, null, 2);
-    fs.writeFileSync('db.json', dbJsonStr);
-    res.json(dbJson)
-    
-    log(`User ${dbJson.GeneralData.Nickname} sent ${matchSummary.ModeName} result as ${matchSummary.MatchResult} with ${matchSummary.KillCount} kills and got ${trophies} trophies`)
-})
-app.post("/v4710_rankRoad/claimRoadReward", (req, res) => {
-    let db = fs.readFileSync('db.json', 'utf-8');
-    let dbJson = JSON.parse(db);
-    var rewardID = req.body.rewardID;
-    const newReward = {"ProductID": rewardID};
-    if (!dbJson.RankRoad.AccountRoad.ClaimedRewards) {
-        dbJson.RankRoad.AccountRoad.ClaimedRewards = [];
-    }
-    
-    const json2 = JSON.parse(fs.readFileSync("./Helpers/Champions.json","utf-8"))
-    let claimedReward = {}
-    if(rewardID.includes("lolbox"))
-    {
-        // handle box opening
-        claimedReward = 
-            [
-                {
-                    "Amount":  Math.floor(Math.random() * 3000),
-                    "RewardType": "LOLCoins"
-                },
-            ]
-        for(let i = 0; i < 4;i++)
-        {
-            let rand = Math.floor(Math.random() * json2.length);
-            if(dbJson.Champions.OwnedChampions[json2[rand]] != null)
-            {    
-                let shards = Math.floor(Math.random() * 200);
-                claimedReward.push({"ProductID":json2[rand],"RewardType":"Blueprints","Amount":shards})
-                dbJson.Champions.ChampionShards[json2[rand]] += shards;
-            } else {
-                i--;
+        try {
+            const pickaxe = JSON.parse(req.body.ids);
+            if (!Array.isArray(pickaxe)) {
+                return res.status(400).send({ error: 'Invalid pickaxe data' });
             }
-        }
-        if(Math.random() < 0.5)
-        {
-            if(dbJson.Champions.OwnedChampions.length === json2.length)
-            {
-                //console.log("Skipping Champion drop because user already has every champion")
-                
-            } else {
-                let rand = Math.floor(Math.random() * json2.length);
-                while(dbJson.Champions.OwnedChampions[json2[rand]] != null)
-                {
-                    //console.log("Wanted to give "+json2[rand]+" but user already has it")
-                    rand = Math.floor(Math.random() * json2.length);
+            data.Skins.EquippedWeaponSkins = pickaxe;
+
+            database.updateUserData(token, data, (err) => {
+                if (err) {
+                    res.status(500).send({ error: 'Failed to update pickaxe' });
+                    return;
                 }
-                claimedReward.push({"ProductID":json2[rand],"RewardType":"Product","Amount":Math.floor(Math.random() * 200)})    
-                let name = json2[rand];
-                dbJson.Champions.OwnedChampions[name] = { "Level": 0 };
-                dbJson.Champions.ChampionShards[name] = 0;
-                
+                res.status(200).send(req.body.ids);
+                log(`User ${data.GeneralData.Nickname} has updated their pickaxe`);
+            });
+        } catch (error) {
+            console.error(error);
+            res.status(500).send({ error: 'Failed to update pickaxe' });
+        }
+    });
+});
+
+app.post("/v4710_champions/equip", (req, res) => {
+    const token = buffer.from((req.headers['x-forwarded-for'] || req.socket.remoteAddress)+req.headers['Host']).toString('base64');;
+    database.getUserData(token, (err, data) => {
+        if (err) {
+            res.status(500).send({ error: 'Failed to retrieve user data' });
+            return;
+        }
+
+        const champion = req.body.championId;
+        data.Champions.SelectedChampion = champion;
+
+        database.updateUserData(token, data, (err) => {
+            if (err) {
+                res.status(500).send({ error: 'Failed to update champion' });
+                return;
+            }
+            res.send("true");
+        });
+    });
+});
+
+app.get("/v4710_player/updateProgressAndStats", (req, res) => {
+    const token = buffer.from((req.headers['x-forwarded-for'] || req.socket.remoteAddress)+req.headers['Host']).toString('base64');;
+    database.getUserData(token, (err, data) => {
+        if (err) {
+            res.status(500).send({ error: 'Failed to retrieve user data' });
+            return;
+        }
+
+        const matchSummary = JSON.parse(req.query.matchSummary);
+        let trophies = calculateTrophies(matchSummary.Placement, 20, 4, 16);
+
+        if (matchSummary.ModeName === "Showdown_Duos") {
+            trophies += matchSummary.KillCount + matchSummary.TeamKills;
+        }
+        if (matchSummary.ModeName === "Showdown") {
+            trophies += matchSummary.KillCount;
+        }
+        console.log("Given " + trophies + " trophies to player");
+
+        if (matchSummary.MatchResult === "win") {
+            if (matchSummary.ModeName === "Showdown_Duos") {
+                data.GeneralData.Stats.Victories.Showdown_Duos++;
+            }
+            if (matchSummary.ModeName === "Showdown") {
+                data.GeneralData.Stats.Victories.Showdown++;
+            }
+            if (matchSummary.ModeName === "1v1_Clash") {
+                data.GeneralData.Stats.Victories["1v1_Clash"]++;
+            }
+        } else {
+            if (matchSummary.ModeName === "Showdown_Duos") {
+                data.GeneralData.Stats.Defeats.Showdown++;
+            }
+            if (matchSummary.ModeName === "Showdown") {
+                data.GeneralData.Stats.Defeats.Showdown++;
             }
         }
-        
-    } else {
-        // handle normal response like gems
-        claimedReward = [dbJson.RankRoad.AccountRoad.AvailableRewards.find(reward => reward.ProductID === rewardID)];
 
-        if (dbJson.RankRoad.AccountRoad.AvailableRewards.find(reward => reward.RewardType === "LOLTokens")) {
-            let lolTokensReward = dbJson.RankRoad.AccountRoad.AvailableRewards.find(reward => reward.RewardType === "LOLTokens");
-            dbJson.GeneralData.LOLTokens += lolTokensReward.Amount;
+        data.GeneralData.Stats.TotalKills += matchSummary.KillCount;
+        data.GeneralData.Stats.TotalDeaths += matchSummary.DeathCount;
+        data.RankRoad.AccountRoad.XP += trophies;
+        if (data.RankRoad.AccountRoad.XP > data.RankRoad.AccountRoad.HighestXP)
+            data.RankRoad.AccountRoad.HighestXP = data.RankRoad.AccountRoad.XP;
+
+        database.updateUserData(token, data, (err) => {
+            if (err) {
+                res.status(500).send({ error: 'Failed to update user' });
+                return;
+            }
+            res.json(data);
+            log(`User ${data.GeneralData.Nickname} sent ${matchSummary.ModeName} result as ${matchSummary.MatchResult} with ${matchSummary.KillCount} kills and got ${trophies} trophies`);
+        });
+    });
+});
+app.post("/v4710_rankRoad/claimRoadReward", (req, res) => {
+    const token = buffer.from((req.headers['x-forwarded-for'] || req.socket.remoteAddress)+req.headers['Host']).toString('base64');;
+    database.getUserData(token, (err, data) => {
+        if (err) {
+            res.status(500).send({ error: 'Failed to retrieve user data' });
+            return;
         }
 
-        if (dbJson.RankRoad.AccountRoad.AvailableRewards.find(reward => reward.RewardType === "LOLCoins")) {
-            let lolCoinsReward = dbJson.RankRoad.AccountRoad.AvailableRewards.find(reward => reward.RewardType === "LOLCoins");
-            dbJson.GeneralData.HardCurrency += lolCoinsReward.Amount;
+        const rewardID = req.body.rewardID;
+        const newReward = { "ProductID": rewardID };
+        if (!data.RankRoad.AccountRoad.ClaimedRewards) {
+            data.RankRoad.AccountRoad.ClaimedRewards = [];
         }
 
-    } 
-    
-    dbJson.RankRoad.AccountRoad.ClaimedRewards.push(newReward);
-    
-    log(`User ${dbJson.GeneralData.Nickname} reedemed trophy road reward: ${rewardID}`)
-    let dbJsonStr = JSON.stringify(dbJson, null, 2);
-    fs.writeFileSync('db.json', dbJsonStr);
-    if (claimedReward) {
-        res.json(claimedReward);
-    } else {
-        res.status(404).json({ error: "Reward not found" });
-    }
+        const json2 = JSON.parse(fs.readFileSync("./Helpers/Champions.json", "utf-8")); // Consider moving this to database or config file
+        let claimedReward = {};
+
+        if (rewardID.includes("lolbox")) {
+            // handle box opening
+            claimedReward = [
+                {
+                    "Amount": Math.floor(Math.random() * 3000),
+                    "RewardType": "LOLCoins"
+                }
+            ];
+            for (let i = 0; i < 4; i++) {
+                let rand = Math.floor(Math.random() * json2.length);
+                if (data.Champions.OwnedChampions[json2[rand]] != null) {
+                    let shards = Math.floor(Math.random() * 200);
+                    claimedReward.push({ "ProductID": json2[rand], "RewardType": "Blueprints", "Amount": shards });
+                    data.Champions.ChampionShards[json2[rand]] += shards;
+                } else {
+                    i--;
+                }
+            }
+            if (Math.random() < 0.5) {
+                if (data.Champions.OwnedChampions.length === json2.length) {
+                    // No action
+                } else {
+                    let rand = Math.floor(Math.random() * json2.length);
+                    while (data.Champions.OwnedChampions[json2[rand]] != null) {
+                        rand = Math.floor(Math.random() * json2.length);
+                    }
+                    claimedReward.push({ "ProductID": json2[rand], "RewardType": "Product", "Amount": Math.floor(Math.random() * 200) });
+                    let name = json2[rand];
+                    data.Champions.OwnedChampions[name] = { "Level": 0 };
+                    data.Champions.ChampionShards[name] = 0;
+                }
+            }
+        } else {
+            // handle normal response like gems
+            claimedReward = [data.RankRoad.AccountRoad.AvailableRewards.find(reward => reward.ProductID === rewardID)];
+
+            if (data.RankRoad.AccountRoad.AvailableRewards.find(reward => reward.RewardType === "LOLTokens")) {
+                let lolTokensReward = data.RankRoad.AccountRoad.AvailableRewards.find(reward => reward.RewardType === "LOLTokens");
+                data.GeneralData.LOLTokens += lolTokensReward.Amount;
+            }
+
+            if (data.RankRoad.AccountRoad.AvailableRewards.find(reward => reward.RewardType === "LOLCoins")) {
+                let lolCoinsReward = data.RankRoad.AccountRoad.AvailableRewards.find(reward => reward.RewardType === "LOLCoins");
+                data.GeneralData.HardCurrency += lolCoinsReward.Amount;
+            }
+        }
+
+        data.RankRoad.AccountRoad.ClaimedRewards.push(newReward);
+
+        database.updateUserData(token, data, (err) => {
+            if (err) {
+                res.status(500).send({ error: 'Failed to update rewards' });
+                return;
+            }
+            log(`User ${data.GeneralData.Nickname} redeemed trophy road reward: ${rewardID}`);
+            res.json(claimedReward);
+        });
+    });
 });
-app.post("/v4710_player/nickname",(req,res)=>{
-    let newnickname = req.body.nickname;
-    const json = JSON.parse(fs.readFileSync("./db.json"));
-    log(`User ${json.GeneralData.Nickname} has changed their nickname, ${json.GeneralData.Nickname} => ${newnickname}`)
-    json.GeneralData.Nickname = newnickname;
-    res.send('true');
-    let db = JSON.stringify(json, null, 2);
-    fs.writeFileSync('db.json', db);
+app.post("/v4710_player/nickname", (req, res) => {
+    const token = buffer.from((req.headers['x-forwarded-for'] || req.socket.remoteAddress)+req.headers['Host']).toString('base64');;
+    const newnickname = req.body.nickname;
+    database.getUserData(token, (err, data) => {
+        if (err) {
+            res.status(500).send({ error: 'Failed to retrieve user data' });
+            return;
+        }
+
+        log(`User ${data.GeneralData.Nickname} has changed their nickname, ${data.GeneralData.Nickname} => ${newnickname}`);
+        data.GeneralData.Nickname = newnickname;
+
+        database.updateUserData(token, data, (err) => {
+            if (err) {
+                res.status(500).send({ error: 'Failed to update nickname' });
+                return;
+            }
+            res.send('true');
+        });
+    });
 });
+
 app.listen(80);

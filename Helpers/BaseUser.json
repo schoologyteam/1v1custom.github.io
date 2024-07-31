@@ -1,0 +1,494 @@
+{
+    "GeneralData": {
+      "ID": "randomidlol",
+      "Nickname": "user",
+      "Country": "",
+      "Region": "",
+      "IsMigrated": false,
+      "BoxRating": 0,
+      "DuosRating": 0,
+      "Elo": 0,
+      "OpenskillModel": {
+        "Ranking": 50.85468753378335,
+        "RatingData": {
+          "sigma": 3.55172646878418,
+          "mu": 61.509866940135886
+        }
+      },
+      "SoftCurrency": 0,
+      "CustomRating": 0,
+      "HardCurrency": 0,
+      "LoLTokens": 0,
+      "CreatedAt": "2023-08-28T14:11:35.913Z",
+      "Logins": {
+        "LastLoginTime": 1722355479468,
+        "CurrentLoginTime": 1722355917178,
+        "TotalLogins": 239,
+        "DailyConsecutiveLogins": 1
+      },
+      "Stats": {
+        "TotalGamesPlayed": 0,
+        "TotalKills": 0,
+        "TotalDeaths": 0,
+        "Victories": {
+          "Showdown": 0,
+          "Showdown_Duos": 0,
+          "GrandBattleRoyale": 0,
+          "GrandBattleRoyale_Duos": 0,
+          "1v1_Competitive_Migration": 0,
+          "1v1_Migration": 0,
+          "1v1_Clash": 0
+        },
+        "Defeats": {
+          "Showdown": 0,
+          "GrandBattleRoyale": 0,
+          "GrandBattleRoyale_Duos": 0,
+          "1v1_Competitive_Migration": 0,
+          "1v1_Migration": 0
+        },
+        "Ties": {
+          "1v1_Competitive_Migration": 0,
+          "1v1_Migration": 0
+        },
+        "ConsecutiveWins": 0
+      },
+      "PrivacySettings": {
+        "HasSeenTailoredAdsPopup": false,
+        "HasAcceptedTailoredAds": false
+      },
+      "Premium": {
+        "AdsDisabled": false,
+        "LTV": 0,
+        "DidMigrateAdsDisabled": true
+      },
+      "NonconsumablePacks": [],
+      "XP": 99999999,
+      "RVData": {
+        "Watched": 0,
+        "CurrentSkin": "",
+        "LastRvSkinTime": "1970-01-01T00:00:00.000Z"
+      },
+      "MatchHistory": {
+        "MatchSampleTimestamp": 1722350646938,
+        "MatchesSinceSample": 1,
+        "Exceeds": 0
+      },
+      "FriendInviteLink": {},
+      "AgeGate": {
+        "IsUnderage": false,
+        "GuardianPermissionGranted": [],
+        "ShouldShowUpdatedPermissionsPopup": false
+      },
+      "LOLTokens": 0,
+      "LOLCoins": 0
+    },
+    "Settings": {
+      "Controls": {
+        "WebGL_MusicVolumeSlider": "0"
+      },
+      "SettingsVersion": 2
+    },
+    "Skins": {
+      "EquippedChampionSkins": {},
+      "CharacterSkins": [
+        "lol.1v1.playerskins.pack.quick.default"
+      ],
+      "EquippedWeaponSkins": [
+        "lol.1v1.weaponskins.melee.pickaxe.default"
+      ],
+      "EquippedCharacterSkin": "lol.1v1.playerskins.pack.quick.default",
+      "OwnedEmotes": [
+      ],
+      "EquippedEmotes": [
+      ],
+      "WeaponSkins": [
+        "lol.1v1.weaponskins.melee.pickaxe.default"
+      ],
+      "CompensationVersion": 1
+    },
+    "BattlePass": {
+      "Seasons": {},
+      "XPBankData": {
+        "LastXPRefreshTimestamp": 1696783346662,
+        "XPLeft": -480
+      }
+    },
+    "TrophyRoad": {
+      "Seasons": {}
+    },
+    "RankRoad": {
+      "Seasons": {},
+      "AccountRoad": {
+        "XP": 0,
+        "HighestXP": 0,
+        "AvailableRewards": [
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.mystery_champion_rank_bronze_1"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.grenade_box_rank_bronze_2"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.mystery_champion_rank_silver_2"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.mega_rank_unranked"
+          },
+          {
+            "RewardType": "LOLTokens",
+            "Amount": 15,
+            "ProductID": "Tokens1"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.lite_rank_bronze_1"
+          },
+          {
+            "RewardType": "LOLCoins",
+            "Amount": 20,
+            "ProductID": "Coins1"
+          },
+          {
+            "RewardType": "LOLCoins",
+            "Amount": 20,
+            "ProductID": "Coins2"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.ultra_rank_bronze_2"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.lite_rank_bronze_2"
+          },
+          {
+            "RewardType": "LOLTokens",
+            "Amount": 15,
+            "ProductID": "Tokens2"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.ultra_rank_bronze_3"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.mega_rank_bronze_3"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.lite_rank_silver_1"
+          },
+          {
+            "RewardType": "LOLCoins",
+            "Amount": 60,
+            "ProductID": "Coins3"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.ultra_rank_silver_1"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.lite_rank_silver_2"
+          },
+          {
+            "RewardType": "LOLCoins",
+            "Amount": 80,
+            "ProductID": "Coins4"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.ultra_rank_silver_2"
+          },
+          {
+            "RewardType": "LOLTokens",
+            "Amount": 15,
+            "ProductID": "Tokens3"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.mega_rank_silver_3"
+          },
+          {
+            "RewardType": "LOLCoins",
+            "Amount": 100,
+            "ProductID": "Coins45"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.lite_rank_gold_1"
+          },
+          {
+            "RewardType": "LOLCoins",
+            "Amount": 120,
+            "ProductID": "Coins5"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.ultra_rank_gold_1"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.lite_rank_gold_2"
+          },
+          {
+            "RewardType": "LOLCoins",
+            "Amount": 140,
+            "ProductID": "Coins6"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.ultra_rank_gold_2"
+          },
+          {
+            "RewardType": "LOLTokens",
+            "Amount": 35,
+            "ProductID": "Tokens4"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.mega_rank_gold_3"
+          },
+          {
+            "RewardType": "LOLCoins",
+            "Amount": 160,
+            "ProductID": "Coins7"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.lite_rank_platinum_1"
+          },
+          {
+            "RewardType": "LOLCoins",
+            "Amount": 180,
+            "ProductID": "Coins8"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.mega_rank_platinum_1"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.ultra_rank_platinum_2"
+          },
+          {
+            "RewardType": "LOLCoins",
+            "Amount": 200,
+            "ProductID": "Coins9"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.lite_rank_platinum_2"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.ultra_rank_platinum_3"
+          },
+          {
+            "RewardType": "LOLTokens",
+            "Amount": 85,
+            "ProductID": "Tokens5"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.mega_rank_platinum_3"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.lite_rank_champion_1"
+          },
+          {
+            "RewardType": "LOLCoins",
+            "Amount": 300,
+            "ProductID": "Coins10"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.mega_rank_champion_1"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.lite_rank_champion_2"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.ultra_rank_champion_2"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.mega_rank_champion_2"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.ultra_rank_champion_3"
+          },
+          {
+            "RewardType": "LOLTokens",
+            "Amount": 175,
+            "ProductID": "Tokens6"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.mega_rank_champion_3"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.lite_rank_elite_1"
+          },
+          {
+            "RewardType": "LOLCoins",
+            "Amount": 500,
+            "ProductID": "Coins11"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.mega_rank_elite_1"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.lite_rank_elite_2"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.ultra_rank_elite_2"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.mega_rank_elite_2"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.ultra_rank_elite_3"
+          },
+          {
+            "RewardType": "LOLTokens",
+            "Amount": 350,
+            "ProductID": "Tokens7"
+          },
+          {
+            "RewardType": "Product",
+            "ProductID": "lol.1v1.lolbox.mega_rank_elite_3"
+          }
+        ],
+        "ClaimedRewards": [
+          
+        ]
+      }
+    },
+    "DailyRewards": {
+      "Rewards": [],
+      "InfluencerCampaign": {
+        "LastSkinClaimTimestamp": 0
+      }
+    },
+    "Equipment": {
+      "Equipment": {
+        "lol.1v1.weapons.pump_shotgun": {
+          "Level": 0
+        },
+        "lol.1v1.weapons.scar": {
+          "Level": 0
+        }
+      },
+      "Loadouts": [
+        {
+          "LoadoutName": "",
+          "EquippedArmor": [
+            ""
+          ],
+          "EquippedWeapons": [
+            "lol.1v1.weapons.scar",
+            "lol.1v1.weapons.pump_shotgun"
+          ],
+          "EquippedBuildsMaterial": [
+            ""
+          ]
+        }
+      ],
+      "EquippedLoadout": 0,
+      "AvailableLoadouts": 2,   
+      "AvailableWeaponSlots": 3,
+      "AvailableArmorSlots": 1,
+      "UpgradeCards": {
+        "lol.1v1.weapons.scar": 0,
+        "lol.1v1.armors.body.recovery": 0
+      }
+    },
+    "Inventory": {
+      "LootBoxes": [
+        
+      ],
+      "Spins": [],
+      "LootBoxesQueue": [],
+      "MaxLootBoxesQueues": 1,
+      "CachedRewards": {}
+    },
+    "Challenges": {
+      "CurrentFetchTime": 1722355200000,
+      "LastFetchTime": 1722355200000,
+      "LastDailyBonusClaimTime": 1697385600000,
+      "CurrentStreak": 0,
+      "DidClaimStreakBonus": false,
+      "DidClaimDailyBonus": false,
+      "DailyChallengesData": {},
+      "SeasonalChallengesData": {}
+    },
+    "Offers": {
+      "Tier": 0,
+      "Timestamp": "2023-08-28T14:11:36.082Z",
+      "Offers": {}
+    },
+    "Leaderboards": {
+      "Nickname": "",
+      "Leaderboards": {},
+      "IsBlacklisted": false
+    },
+    "Subscriptions": {
+      "Subscriptions": {}
+    },
+    "ProgressionEvents": {
+      "Events": {}
+    },
+    "UserRV": {
+      "BoxTimeCutter": {
+        "LastRefreshTime": 1722355917571,
+        "RVsLeft": 3
+      },
+      "HighValueRVOffer": {
+        "LastRefreshTime": 1722355917571,
+        "RVsLeft": 3
+      }
+    },
+    "Champions": {
+      "OwnedChampions": {
+        "lol.1v1.champions.quick": {
+          "Level": 0
+        }
+      },
+      "SelectedChampion": "lol.1v1.champions.quick",
+      "ChampionShards": {
+        "lol.1v1.champions.quick": 406
+      }
+    },
+    "DailyModes": {
+      "DailyModes": {}
+    },
+    "UserAlbumsData": {
+      "UserAlbums": {
+        "lol.1v1.album.dragon_lab": {
+          "Occurences": {
+            "wowie2222": {
+              "ClaimedPrize": false,
+              "UserSets": {}
+            }
+          }
+        }
+      }
+    },
+    "PsfToken": "",
+    "DevicePerformanceTier": 0
+  }
