@@ -6,3 +6,5 @@
  - equipping pickaxes
  - equipping emotes
  - getting trophies for match
+ - trophy road drops
+ - basic box openings
