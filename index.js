@@ -219,10 +219,10 @@ app.post("/v4710_rankRoad/claimRoadReward", (req, res) => {
 
         if (dbJson.RankRoad.AccountRoad.AvailableRewards.find(reward => reward.RewardType === "LOLCoins")) {
             let lolCoinsReward = dbJson.RankRoad.AccountRoad.AvailableRewards.find(reward => reward.RewardType === "LOLCoins");
-            dbJson.GeneralData.LOLCoins += lolCoinsReward.Amount;
+            dbJson.GeneralData.HardCurrency += lolCoinsReward.Amount;
         }
 
-    }
+    } 
     
     dbJson.RankRoad.AccountRoad.ClaimedRewards.push(newReward);
     let dbJsonStr = JSON.stringify(dbJson, null, 2);
