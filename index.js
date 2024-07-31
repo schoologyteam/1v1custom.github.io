@@ -200,8 +200,10 @@ app.post("/v4710_rankRoad/claimRoadReward", (req, res) => {
                     rand = Math.floor(Math.random() * json2.length);
                 }
                 claimedReward.push({"ProductID":json2[rand],"RewardType":"Product","Amount":Math.floor(Math.random() * 200)})    
+                let name = json2[rand];
+                dbJson.Champions.OwnedChampions[name] = { "Level": 0 };
+                
             }
-            
         }
         
     } else {
