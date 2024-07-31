@@ -181,7 +181,7 @@ app.post("/v4710_rankRoad/claimRoadReward", (req, res) => {
             let rand = Math.floor(Math.random() * json2.length);
             claimedReward.push({"ProductID":json2[rand],"RewardType":"Blueprints","Amount":Math.floor(Math.random() * 200)})
         }
-        if(Math.random())
+        if(Math.random() == 1)
         {
             if(dbJson.Champions.OwnedChampions.length === json2.length)
             {
