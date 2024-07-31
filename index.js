@@ -34,8 +34,12 @@ app.get("/v4710_player/getRegionInfo",(req,res)=>{
     res.json({"Country":"US","Region":"CA","AgeGateLimit":13,"HasAgeGate":true,"IsBlocked":false});
 })
 app.get("/v4710_player/login",(req,res)=>{
+    const info = JSON.parse(fs.readFileSync('db.json', 'utf-8'))
+    let dat = fs.readFileSync("AccountRoad.json");
+    const data2 = JSON.parse(dat);
+    info.RankRoad.AccountRoad.AvailableRewards = data2
     res.json(
-        JSON.parse(fs.readFileSync('db.json', 'utf-8'))
+        info
     )
 })
 app.get("/v4710_userSettings/time",(req,res)=>{
@@ -150,4 +154,22 @@ app.get("/v4710_player/updateProgressAndStats",(req,res)=>{
     fs.writeFileSync('db.json', dbJsonStr);
     res.json(dbJson)
 })
+app.post("/v4710_rankRoad/claimRoadReward", (req, res) => {
+    let db = fs.readFileSync('db.json', 'utf-8');
+    let dbJson = JSON.parse(db);
+    var rewardID = req.body.rewardID;
+    const newReward = {"ProductID": rewardID};
+    if (!dbJson.RankRoad.AccountRoad.ClaimedRewards) {
+        dbJson.RankRoad.AccountRoad.ClaimedRewards = [];
+    }
+    dbJson.RankRoad.AccountRoad.ClaimedRewards.push(newReward);
+    let dbJsonStr = JSON.stringify(dbJson, null, 2);
+    fs.writeFileSync('db.json', dbJsonStr);
+    let claimedReward = dbJson.RankRoad.AccountRoad.AvailableRewards.find(reward => reward.ProductID === rewardID);
+    if (claimedReward) {
+        res.json([claimedReward]);
+    } else {
+        res.status(404).json({ error: "Reward not found" });
+    }
+});
 app.listen(80);
