@@ -79,8 +79,8 @@
       "GuardianPermissionGranted": [],
       "ShouldShowUpdatedPermissionsPopup": false
     },
-    "LOLTokens": 189,
-    "LOLCoins": 244
+    "LOLTokens": 204,
+    "LOLCoins": 264
   },
   "Settings": {
     "Controls": {
@@ -418,16 +418,22 @@
       ],
       "ClaimedRewards": [
         {
-          "ProductID": "Tokens1"
-        },
-        {
-          "ProductID": "lol.1v1.lolbox.lite_rank_bronze_2"
+          "ProductID": "lol.1v1.lolbox.mega_rank_unranked"
         },
         {
           "ProductID": "lol.1v1.lolbox.mystery_champion_rank_bronze_1"
         },
         {
-          "ProductID": "lol.1v1.lolbox.mega_rank_unranked"
+          "ProductID": "lol.1v1.lolbox.lite_rank_bronze_1"
+        },
+        {
+          "ProductID": "Tokens1"
+        },
+        {
+          "ProductID": "lol.1v1.lolbox.ultra_rank_bronze_2"
+        },
+        {
+          "ProductID": "lol.1v1.lolbox.lite_rank_bronze_2"
         }
       ]
     }
@@ -555,13 +561,12 @@
     "OwnedChampions": {
       "lol.1v1.champions.quick": {
         "Level": 0
-      },
-      "lol.1v1.champions.frosty": {
-        "Level": 0
       }
     },
-    "SelectedChampion": "lol.1v1.champions.shadow",
-    "ChampionShards": {}
+    "SelectedChampion": "lol.1v1.champions.quick",
+    "ChampionShards": {
+      "lol.1v1.champions.quick": 0
+    }
   },
   "DailyModes": {
     "DailyModes": {}

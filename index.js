@@ -174,14 +174,15 @@ app.post("/v4710_rankRoad/claimRoadReward", (req, res) => {
                     "Amount":  Math.floor(Math.random() * 3000),
                     "RewardType": "LOLCoins"
                 },
-                {"ProductID":"lol.1v1.champions.quick","RewardType":"Blueprints","Amount":Math.floor(Math.random() * 200)}
             ]
         for(let i = 0; i < 4;i++)
         {
             let rand = Math.floor(Math.random() * json2.length);
             if(dbJson.Champions.OwnedChampions[json2[rand]] != null)
             {    
-                claimedReward.push({"ProductID":json2[rand],"RewardType":"Blueprints","Amount":Math.floor(Math.random() * 200)})
+                let shards = Math.floor(Math.random() * 200);
+                claimedReward.push({"ProductID":json2[rand],"RewardType":"Blueprints","Amount":shards})
+                dbJson.Champions.ChampionShards[json2[rand]] += shards;
             } else {
                 i--;
             }
@@ -202,6 +203,7 @@ app.post("/v4710_rankRoad/claimRoadReward", (req, res) => {
                 claimedReward.push({"ProductID":json2[rand],"RewardType":"Product","Amount":Math.floor(Math.random() * 200)})    
                 let name = json2[rand];
                 dbJson.Champions.OwnedChampions[name] = { "Level": 0 };
+                dbJson.Champions.ChampionShards[name] = 0;
                 
             }
         }
