@@ -28,10 +28,10 @@
     },
     "Stats": {
       "TotalGamesPlayed": 0,
-      "TotalKills": 17,
-      "TotalDeaths": 3,
+      "TotalKills": 37,
+      "TotalDeaths": 4,
       "Victories": {
-        "Showdown": 1,
+        "Showdown": 3,
         "Showdown_Duos": 0,
         "GrandBattleRoyale": 0,
         "GrandBattleRoyale_Duos": 0,
@@ -40,7 +40,7 @@
         "1v1_Clash": 0
       },
       "Defeats": {
-        "Showdown": 4,
+        "Showdown": 5,
         "GrandBattleRoyale": 0,
         "GrandBattleRoyale_Duos": 0,
         "1v1_Competitive_Migration": 0,
@@ -159,8 +159,8 @@
   "RankRoad": {
     "Seasons": {},
     "AccountRoad": {
-      "XP": 71,
-      "HighestXP": 71,
+      "XP": 145,
+      "HighestXP": 145,
       "AvailableRewards": [
         {
           "RewardType": "Product",
@@ -415,15 +415,7 @@
         }
       ],
       "ClaimedRewards": [
-        {
-          "ProductID": "Tokens1"
-        },
-        {
-          "ProductID": "lol.1v1.lolbox.mega_rank_unranked"
-        },
-        {
-          "ProductID": "lol.1v1.lolbox.lite_rank_bronze_1"
-        }
+        
       ]
     }
   },

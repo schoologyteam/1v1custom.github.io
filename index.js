@@ -166,22 +166,24 @@ app.post("/v4710_rankRoad/claimRoadReward", (req, res) => {
     let dbJsonStr = JSON.stringify(dbJson, null, 2);
     fs.writeFileSync('db.json', dbJsonStr);
     let claimedReward = {}
-    if(rewardID.contains("lolbox"))
+    if(rewardID.includes("lolbox"))
     {
         // handle box opening
-        claimedReward = [
-            {
-                "Amount": Math.floor(5000),
-                "RewardType": "LOLCoins"
-            },
-            {"ProductID":"lol.1v1.champions.quick","RewardType":"Blueprints","Amount":78}
-        ]
+        claimedReward = 
+            [
+                {
+                    "Amount":  Math.floor(Math.random() * 3000),
+                    "RewardType": "LOLCoins"
+                },
+                {"ProductID":"lol.1v1.champions.quick","RewardType":"Blueprints","Amount":Math.floor(Math.random() * 200)}
+            ]
+        
     } else {
         // handle normal response like gems
-        claimedReward = dbJson.RankRoad.AccountRoad.AvailableRewards.find(reward => reward.ProductID === rewardID);
+        claimedReward = [dbJson.RankRoad.AccountRoad.AvailableRewards.find(reward => reward.ProductID === rewardID)];
     }
     if (claimedReward) {
-        res.json([claimedReward]);
+        res.json(claimedReward);
     } else {
         res.status(404).json({ error: "Reward not found" });
     }
