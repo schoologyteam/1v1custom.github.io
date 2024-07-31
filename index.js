@@ -250,5 +250,7 @@ app.post("/v4710_player/nickname",(req,res)=>{
     log(`User ${json.GeneralData.Nickname} has changed their nickname, ${json.GeneralData.Nickname} => ${newnickname}`)
     json.GeneralData.Nickname = newnickname;
     res.send('true');
+    let db = JSON.stringify(json, null, 2);
+    fs.writeFileSync('db.json', db);
 });
 app.listen(80);
