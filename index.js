@@ -10,6 +10,10 @@ function calculateTrophies(placement, trophiesForFirstPlace, trophiesForFourteen
     }
     return trophiesForFirstPlace + Math.round((placement - 1) / (totalPlaces - 1) * (trophiesForFourteenthPlace - trophiesForFirstPlace));
 }
+function log(msg)
+{
+    console.log(`[$] ${msg}`);
+}
 app.get("/v4710_remoteConfig/fetch",(req,res)=>{
     fs.readFile('./RemoteConfig.json', 'utf8', (err, data) => {
         if (err) {
@@ -71,6 +75,7 @@ app.post("/v4710_player/emotes/character/update", (req, res) => {
         let dbJsonStr = JSON.stringify(dbJson, null, 2);
         fs.writeFileSync('db.json', dbJsonStr);
         res.status(200).send('true');
+        log(`User ${dbJson.GeneralData.Nickname} has updated their emotes`)
     } catch (error) {
         console.error(error);
         res.status(500).send({ error: 'Failed to update emotes' });
@@ -88,6 +93,8 @@ app.post("/v4710_player/skins/character/equip/weapon", (req, res) => {
         let dbJsonStr = JSON.stringify(dbJson, null, 2);
         fs.writeFileSync('db.json', dbJsonStr);
         res.status(200).send(req.body.ids);
+        
+        log(`User ${dbJson.GeneralData.Nickname} has updated their pickaxe`)
     } catch (error) {
         console.error(error);
         res.status(500).send({ error: 'Failed to update pickaxe' });
@@ -153,6 +160,8 @@ app.get("/v4710_player/updateProgressAndStats",(req,res)=>{
     let dbJsonStr = JSON.stringify(dbJson, null, 2);
     fs.writeFileSync('db.json', dbJsonStr);
     res.json(dbJson)
+    
+    log(`User ${dbJson.GeneralData.Nickname} sent ${matchSummary.ModeName} result as ${matchSummary.MatchResult} with ${matchSummary.KillCount} kills and got ${trophies} trophies`)
 })
 app.post("/v4710_rankRoad/claimRoadReward", (req, res) => {
     let db = fs.readFileSync('db.json', 'utf-8');
@@ -191,13 +200,13 @@ app.post("/v4710_rankRoad/claimRoadReward", (req, res) => {
         {
             if(dbJson.Champions.OwnedChampions.length === json2.length)
             {
-                console.log("Skipping Champion drop because user already has every champion")
+                //console.log("Skipping Champion drop because user already has every champion")
                 
             } else {
                 let rand = Math.floor(Math.random() * json2.length);
                 while(dbJson.Champions.OwnedChampions[json2[rand]] != null)
                 {
-                    console.log("Wanted to give "+json2[rand]+" but user already has it")
+                    //console.log("Wanted to give "+json2[rand]+" but user already has it")
                     rand = Math.floor(Math.random() * json2.length);
                 }
                 claimedReward.push({"ProductID":json2[rand],"RewardType":"Product","Amount":Math.floor(Math.random() * 200)})    
@@ -225,6 +234,8 @@ app.post("/v4710_rankRoad/claimRoadReward", (req, res) => {
     } 
     
     dbJson.RankRoad.AccountRoad.ClaimedRewards.push(newReward);
+    
+    log(`User ${dbJson.GeneralData.Nickname} reedemed trophy road reward: ${rewardID}`)
     let dbJsonStr = JSON.stringify(dbJson, null, 2);
     fs.writeFileSync('db.json', dbJsonStr);
     if (claimedReward) {
@@ -232,5 +243,12 @@ app.post("/v4710_rankRoad/claimRoadReward", (req, res) => {
     } else {
         res.status(404).json({ error: "Reward not found" });
     }
+});
+app.post("/v4710_player/nickname",(req,res)=>{
+    let newnickname = req.body.nickname;
+    const json = JSON.parse(fs.readFileSync("./db.json"));
+    log(`User ${json.GeneralData.Nickname} has changed their nickname, ${json.GeneralData.Nickname} => ${newnickname}`)
+    json.GeneralData.Nickname = newnickname;
+    res.send('true');
 });
 app.listen(80);

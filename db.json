@@ -17,7 +17,7 @@
     },
     "SoftCurrency": 0,
     "CustomRating": 974,
-    "HardCurrency": 0,
+    "HardCurrency": 60,
     "LoLTokens": 51,
     "CreatedAt": "2023-08-28T14:11:35.913Z",
     "Logins": {
@@ -28,8 +28,8 @@
     },
     "Stats": {
       "TotalGamesPlayed": 0,
-      "TotalKills": 50,
-      "TotalDeaths": 6,
+      "TotalKills": 56,
+      "TotalDeaths": 8,
       "Victories": {
         "Showdown": 4,
         "Showdown_Duos": 0,
@@ -40,7 +40,7 @@
         "1v1_Clash": 0
       },
       "Defeats": {
-        "Showdown": 7,
+        "Showdown": 9,
         "GrandBattleRoyale": 0,
         "GrandBattleRoyale_Duos": 0,
         "1v1_Competitive_Migration": 0,
@@ -79,7 +79,7 @@
       "GuardianPermissionGranted": [],
       "ShouldShowUpdatedPermissionsPopup": false
     },
-    "LOLTokens": 204,
+    "LOLTokens": 249,
     "LOLCoins": 264
   },
   "Settings": {
@@ -161,8 +161,8 @@
   "RankRoad": {
     "Seasons": {},
     "AccountRoad": {
-      "XP": 214,
-      "HighestXP": 214,
+      "XP": 247,
+      "HighestXP": 247,
       "AvailableRewards": [
         {
           "RewardType": "Product",
@@ -434,6 +434,21 @@
         },
         {
           "ProductID": "lol.1v1.lolbox.lite_rank_bronze_2"
+        },
+        {
+          "ProductID": "Coins1"
+        },
+        {
+          "ProductID": "lol.1v1.lolbox.ultra_rank_bronze_3"
+        },
+        {
+          "ProductID": "lol.1v1.lolbox.ultra_rank_bronze_3"
+        },
+        {
+          "ProductID": "Coins2"
+        },
+        {
+          "ProductID": "Tokens2"
         }
       ]
     }
@@ -565,7 +580,7 @@
     },
     "SelectedChampion": "lol.1v1.champions.quick",
     "ChampionShards": {
-      "lol.1v1.champions.quick": 0
+      "lol.1v1.champions.quick": 406
     }
   },
   "DailyModes": {
