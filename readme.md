@@ -8,3 +8,6 @@
  - getting trophies for match
  - trophy road drops
  - basic box openings
+
+## Things i can't fix
+ - Tokens, unfortunately game uses firebase to generate tokens which means that every game launch new unique token is being generated, and you can only verify it when you have the Firebase key
