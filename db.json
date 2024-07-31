@@ -28,8 +28,8 @@
     },
     "Stats": {
       "TotalGamesPlayed": 0,
-      "TotalKills": 44,
-      "TotalDeaths": 4,
+      "TotalKills": 50,
+      "TotalDeaths": 6,
       "Victories": {
         "Showdown": 4,
         "Showdown_Duos": 0,
@@ -40,7 +40,7 @@
         "1v1_Clash": 0
       },
       "Defeats": {
-        "Showdown": 5,
+        "Showdown": 7,
         "GrandBattleRoyale": 0,
         "GrandBattleRoyale_Duos": 0,
         "1v1_Competitive_Migration": 0,
@@ -79,8 +79,8 @@
       "GuardianPermissionGranted": [],
       "ShouldShowUpdatedPermissionsPopup": false
     },
-    "LOLTokens": 39,
-    "LOLCoins": 44
+    "LOLTokens": 174,
+    "LOLCoins": 224
   },
   "Settings": {
     "Controls": {
@@ -161,8 +161,8 @@
   "RankRoad": {
     "Seasons": {},
     "AccountRoad": {
-      "XP": 172,
-      "HighestXP": 172,
+      "XP": 214,
+      "HighestXP": 214,
       "AvailableRewards": [
         {
           "RewardType": "Product",
@@ -422,6 +422,9 @@
         },
         {
           "ProductID": "lol.1v1.lolbox.lite_rank_bronze_1"
+        },
+        {
+          "ProductID": "lol.1v1.lolbox.ultra_rank_bronze_2"
         }
       ]
     }
@@ -551,7 +554,7 @@
         "Level": 0
       }
     },
-    "SelectedChampion": "lol.1v1.champions.quick",
+    "SelectedChampion": "lol.1v1.champions.shadow",
     "ChampionShards": {}
   },
   "DailyModes": {

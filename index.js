@@ -179,9 +179,14 @@ app.post("/v4710_rankRoad/claimRoadReward", (req, res) => {
         for(let i = 0; i < 4;i++)
         {
             let rand = Math.floor(Math.random() * json2.length);
-            claimedReward.push({"ProductID":json2[rand],"RewardType":"Blueprints","Amount":Math.floor(Math.random() * 200)})
+            if(dbJson.Champions.OwnedChampions[json2[rand]] != null)
+            {    
+                claimedReward.push({"ProductID":json2[rand],"RewardType":"Blueprints","Amount":Math.floor(Math.random() * 200)})
+            } else {
+                i--;
+            }
         }
-        if(Math.random() == 1)
+        if(Math.random() < 0.5)
         {
             if(dbJson.Champions.OwnedChampions.length === json2.length)
             {
