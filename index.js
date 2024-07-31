@@ -165,7 +165,21 @@ app.post("/v4710_rankRoad/claimRoadReward", (req, res) => {
     dbJson.RankRoad.AccountRoad.ClaimedRewards.push(newReward);
     let dbJsonStr = JSON.stringify(dbJson, null, 2);
     fs.writeFileSync('db.json', dbJsonStr);
-    let claimedReward = dbJson.RankRoad.AccountRoad.AvailableRewards.find(reward => reward.ProductID === rewardID);
+    let claimedReward = {}
+    if(rewardID.contains("lolbox"))
+    {
+        // handle box opening
+        claimedReward = [
+            {
+                "Amount": Math.floor(5000),
+                "RewardType": "LOLCoins"
+            },
+            {"ProductID":"lol.1v1.champions.quick","RewardType":"Blueprints","Amount":78}
+        ]
+    } else {
+        // handle normal response like gems
+        claimedReward = dbJson.RankRoad.AccountRoad.AvailableRewards.find(reward => reward.ProductID === rewardID);
+    }
     if (claimedReward) {
         res.json([claimedReward]);
     } else {
