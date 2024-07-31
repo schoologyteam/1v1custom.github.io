@@ -162,9 +162,8 @@ app.post("/v4710_rankRoad/claimRoadReward", (req, res) => {
     if (!dbJson.RankRoad.AccountRoad.ClaimedRewards) {
         dbJson.RankRoad.AccountRoad.ClaimedRewards = [];
     }
-    dbJson.RankRoad.AccountRoad.ClaimedRewards.push(newReward);
-    let dbJsonStr = JSON.stringify(dbJson, null, 2);
-    fs.writeFileSync('db.json', dbJsonStr);
+    
+    const json2 = JSON.parse(fs.readFileSync("./Helpers/Champions.json","utf-8"))
     let claimedReward = {}
     if(rewardID.includes("lolbox"))
     {
@@ -177,11 +176,48 @@ app.post("/v4710_rankRoad/claimRoadReward", (req, res) => {
                 },
                 {"ProductID":"lol.1v1.champions.quick","RewardType":"Blueprints","Amount":Math.floor(Math.random() * 200)}
             ]
+        for(let i = 0; i < 4;i++)
+        {
+            let rand = Math.floor(Math.random() * json2.length);
+            claimedReward.push({"ProductID":json2[rand],"RewardType":"Blueprints","Amount":Math.floor(Math.random() * 200)})
+        }
+        if(Math.random())
+        {
+            if(dbJson.Champions.OwnedChampions.length === json2.length)
+            {
+                console.log("Skipping Champion drop because user already has every champion")
+                
+            } else {
+                let rand = Math.floor(Math.random() * json2.length);
+                while(dbJson.Champions.OwnedChampions[json2[rand]] != null)
+                {
+                    console.log("Wanted to give "+json2[rand]+" but user already has it")
+                    rand = Math.floor(Math.random() * json2.length);
+                }
+                claimedReward.push({"ProductID":json2[rand],"RewardType":"Product","Amount":Math.floor(Math.random() * 200)})    
+            }
+            
+        }
         
     } else {
         // handle normal response like gems
         claimedReward = [dbJson.RankRoad.AccountRoad.AvailableRewards.find(reward => reward.ProductID === rewardID)];
+
+        if (dbJson.RankRoad.AccountRoad.AvailableRewards.find(reward => reward.RewardType === "LOLTokens")) {
+            let lolTokensReward = dbJson.RankRoad.AccountRoad.AvailableRewards.find(reward => reward.RewardType === "LOLTokens");
+            dbJson.GeneralData.LOLTokens += lolTokensReward.Amount;
+        }
+
+        if (dbJson.RankRoad.AccountRoad.AvailableRewards.find(reward => reward.RewardType === "LOLCoins")) {
+            let lolCoinsReward = dbJson.RankRoad.AccountRoad.AvailableRewards.find(reward => reward.RewardType === "LOLCoins");
+            dbJson.GeneralData.LOLCoins += lolCoinsReward.Amount;
+        }
+
     }
+    
+    dbJson.RankRoad.AccountRoad.ClaimedRewards.push(newReward);
+    let dbJsonStr = JSON.stringify(dbJson, null, 2);
+    fs.writeFileSync('db.json', dbJsonStr);
     if (claimedReward) {
         res.json(claimedReward);
     } else {
