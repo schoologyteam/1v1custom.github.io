@@ -239,7 +239,7 @@ app.post("/v4710_rankRoad/claimRoadReward", (req, res) => {
                     i--;
                 }
             }
-            if (Math.random() === 0.5) {
+            if (Math.random() < 0.5) {
                 let val = Math.floor(Math.random() * 2)
                 switch(val)
                 {
