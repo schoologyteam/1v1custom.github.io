@@ -216,7 +216,9 @@ app.post("/v4710_rankRoad/claimRoadReward", (req, res) => {
             data.RankRoad.AccountRoad.ClaimedRewards = [];
         }
 
-        const json2 = JSON.parse(fs.readFileSync("./Helpers/Champions.json", "utf-8")); // Consider moving this to database or config file
+        const ChampionsJson = JSON.parse(fs.readFileSync("./Helpers/Champions.json", "utf-8")); 
+        const EmotesJson = JSON.parse(fs.readFileSync("./Helpers/Emotes.json", "utf-8"));
+        const WeaponSkins = JSON.parse(fs.readFileSync("./Helpers/WeaponSkins.json", "utf-8"));
         let claimedReward = {};
 
         if (rewardID.includes("lolbox")) {
@@ -228,27 +230,64 @@ app.post("/v4710_rankRoad/claimRoadReward", (req, res) => {
                 }
             ];
             for (let i = 0; i < 4; i++) {
-                let rand = Math.floor(Math.random() * json2.length);
-                if (data.Champions.OwnedChampions[json2[rand]] != null) {
+                let rand = Math.floor(Math.random() * ChampionsJson.length);
+                if (data.Champions.OwnedChampions[ChampionsJson[rand]] != null) {
                     let shards = Math.floor(Math.random() * 200);
-                    claimedReward.push({ "ProductID": json2[rand], "RewardType": "Blueprints", "Amount": shards });
-                    data.Champions.ChampionShards[json2[rand]] += shards;
+                    claimedReward.push({ "ProductID": ChampionsJson[rand], "RewardType": "Blueprints", "Amount": shards });
+                    data.Champions.ChampionShards[ChampionsJson[rand]] += shards;
                 } else {
                     i--;
                 }
             }
-            if (Math.random() < 0.5) {
-                if (data.Champions.OwnedChampions.length === json2.length) {
-                    // No action
-                } else {
-                    let rand = Math.floor(Math.random() * json2.length);
-                    while (data.Champions.OwnedChampions[json2[rand]] != null) {
-                        rand = Math.floor(Math.random() * json2.length);
-                    }
-                    claimedReward.push({ "ProductID": json2[rand], "RewardType": "Product", "Amount": Math.floor(Math.random() * 200) });
-                    let name = json2[rand];
-                    data.Champions.OwnedChampions[name] = { "Level": 0 };
-                    data.Champions.ChampionShards[name] = 0;
+            if (Math.random()) {
+                let val = Math.floor(Math.random() * 2)
+                switch(val)
+                {
+                    case 0:
+                        {
+                            // Random Champion
+                            if (data.Champions.OwnedChampions.length === ChampionsJson.length) {
+                            } else {
+                                let rand = Math.floor(Math.random() * ChampionsJson.length);
+                                while (data.Champions.OwnedChampions[ChampionsJson[rand]] != null) {
+                                    rand = Math.floor(Math.random() * ChampionsJson.length);
+                                }
+                                claimedReward.push({ "ProductID": ChampionsJson[rand], "RewardType": "Product", "Amount": 1 });
+                                let name = ChampionsJson[rand];
+                                data.Champions.OwnedChampions[name] = { "Level": 0 };
+                                data.Champions.ChampionShards[name] = 0;
+                            }
+                            break;
+                        }
+                    case 1:
+                        {
+                            if (data.Skins.WeaponSkins.length === WeaponSkins.length) {
+                            } else {
+                                let rand = Math.floor(Math.random() * WeaponSkins.length);
+                                while (data.Skins.WeaponSkins[WeaponSkins[rand]] != null) {
+                                    rand = Math.floor(Math.random() * WeaponSkins.length);
+                                }
+                                claimedReward.push({ "ProductID": WeaponSkins[rand], "RewardType": "Product", "Amount": 1 });
+                                let name = WeaponSkins[rand];
+                                data.Skins.WeaponSkins.push(name);
+                            }
+                            break;
+                        }
+                        
+                    case 2:
+                        {
+                            if (data.Skins.OwnedEmotes.length === EmotesJson.length) {
+                            } else {
+                                let rand = Math.floor(Math.random() * EmotesJson.length);
+                                while (data.Skins.OwnedEmotes[EmotesJson[rand]] != null) {
+                                    rand = Math.floor(Math.random() * WeaponSkins.length);
+                                }
+                                claimedReward.push({ "ProductID": EmotesJson[rand], "RewardType": "Product", "Amount": 1 });
+                                let name = EmotesJson[rand];
+                                data.Skins.OwnedEmotes.push(name);
+                            }
+                            break;
+                        }
                 }
             }
         } else {
