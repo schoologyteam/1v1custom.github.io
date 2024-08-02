@@ -1,12 +1,12 @@
 [
-    {
-        "RewardType": "Product",
-        "ProductID": "lol.1v1.lolbox.mystery_champion_rank_bronze_1"
-      },
       {
-        "RewardType": "Product",
-        "ProductID": "lol.1v1.lolbox.grenade_box_rank_bronze_2"
-      },
+          "RewardType": "Product",
+          "ProductID": "lol.1v1.lolbox.mystery_champion_rank_bronze_1"
+        },
+        {
+          "RewardType": "Product",
+          "ProductID": "lol.1v1.lolbox.grenade_box_rank_bronze_2"
+        },
       {
         "RewardType": "Product",
         "ProductID": "lol.1v1.lolbox.mystery_champion_rank_silver_2"
