@@ -6,6 +6,7 @@ const app = express();
 var buffer = require('buffer/').Buffer;
 const database = require("./db.js")
 const BoxesUtil = require("./Utils/Boxes.js")
+const ShardsUtil = require("./Utils/Logic.js")
 app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 
 function calculateTrophies(placement, trophiesForFirstPlace, trophiesForFourteenthPlace, totalPlaces) {
@@ -222,7 +223,7 @@ app.post("/v4710_rankRoad/claimRoadReward", (req, res) => {
         let claimedReward = {};
         if (rewardID.includes("lolbox")) {
             // handle box opening
-            if(rewardID != "lol.1v1.lolbox.mystery_champion_rank_bronze_1")
+            if(!rewardID.includes("lol.1v1.lolbox.mystery_champion"))
             {
                 claimedReward = BoxesUtil.RandomBox(rewardID,data)
             } else {
@@ -288,5 +289,39 @@ app.post("/v4710_player/nickname", (req, res) => {
         });
     });
 });
-
+app.post("/v4710_champions/upgrade",(req,res)=>{
+    var champion = req.body.championId
+    var levelsToAdd = req.body.levelsToAdd
+    const token = buffer.from((req.headers['x-forwarded-for'] || req.socket.remoteAddress)+req.headers['Host']).toString('base64');;
+    database.getUserData(token, (err, data) => {
+        if (err) {
+            res.status(500).send({ error: 'Failed to retrieve user data' });
+            return;
+        }
+        // too bad, need to check if player actually has the champion
+        var level = data.Champions.OwnedChampions[champion].Level;
+        if(level == 0)
+        {
+            log(`${data.GeneralData.Nickname} upgraded ${champion} to level ${level + 1} which costs 25 shards`)
+            data.Champions.OwnedChampions[champion].Level++;
+            data.Champions.ChampionShards[champion]-=(level+1) * 25;
+        } else {
+            console.log(levelsToAdd)
+            for(let i = 1; i <= levelsToAdd; i++)
+                {
+                    log(`${data.GeneralData.Nickname} upgraded ${champion} to level ${level+1} which costs ${(ShardsUtil.CalculateShards(level))} shards`)
+                    data.Champions.OwnedChampions[champion].Level++;
+                    data.Champions.ChampionShards[champion]-=(ShardsUtil.CalculateShards(level));
+                    level = data.Champions.OwnedChampions[champion].Level;
+                }
+        }
+        database.updateUserData(token, data, (err) => {
+            if (err) {
+                res.status(500).send({ error: 'Failed to update data' });
+                return;
+            }
+            res.send('true');
+        });
+    })
+})
 app.listen(80);
