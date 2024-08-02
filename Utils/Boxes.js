@@ -38,7 +38,7 @@ function RandomBox(boxType, data)
     const WeaponSkins = JSON.parse(fs.readFileSync("./Helpers/WeaponSkins.json", "utf-8"));
     BoxContainer = [
         {
-            "Amount": Math.floor(Math.random() * 3000),
+            "Amount": Math.floor(Math.random() * 20000),
             "RewardType": "LOLCoins"
         }
     ];
