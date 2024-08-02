@@ -324,4 +324,28 @@ app.post("/v4710_champions/upgrade",(req,res)=>{
         });
     })
 })
+app.post("/v4710_product/coinPurchase",(req,res)=>{
+    const token = buffer.from((req.headers['x-forwarded-for'] || req.socket.remoteAddress)+req.headers['Host']).toString('base64');;
+    database.getUserData(token, (err, data) => {
+        if (err) {
+            res.status(500).send({ error: 'Failed to retrieve user data' });
+            return;
+        }
+        let cost = req.body.cost
+        let id = req.body.id
+        let currency = req.body.currencyType;
+        if(currency == "LT") // gems aka LOL Tokens
+        {
+            data.GeneralData.LoLTokens-=cost;
+        }
+        database.updateUserData(token, data, (err) => {
+            if (err) {
+                res.status(500).send({ error: 'Failed to update rewards' });
+                return;
+            }
+            log(`User ${data.GeneralData.Nickname} bought ${id} for ${cost} LOL Tokens`);
+            res.json(BoxesUtil.RandomBox(id,data))
+        });
+    })
+})
 app.listen(80);

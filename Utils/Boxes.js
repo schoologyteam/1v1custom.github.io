@@ -3,16 +3,22 @@ function CalculateChance(boxType)
 {
     if(boxType.includes("lolbox.ultra"))
     {
-        return 0.75;
+        return 0.65;
     }
     if(boxType.includes("lolbox.mega"))
     {
-        return 0.50;
+        return 0.35;
     }
     if(boxType.includes("lolbox.lite"))
     {
-        return 0.25;
+        return 0.01;
     }
+    if(boxType.includes("lolbox.cosmic")) 
+        return 0.80;
+    if(boxType.includes("lolbox.supreme"))
+        return 0.50;
+    if(boxType.includes("lolbox.massive"))
+        return 0.25;
     return 0.0;
 }
 function CalculateCards(boxType)
@@ -29,6 +35,56 @@ function CalculateCards(boxType)
     {
         return 4;
     }
+    if(boxType.includes("lolbox.cosmic")) 
+        return 10;
+    if(boxType.includes("lolbox.supreme"))
+        return 8;
+    if(boxType.includes("lolbox.massive"))
+        return 6;
+    return 4;
+}
+function CalculateGold(boxType)
+{
+    if(boxType.includes("lolbox.ultra"))
+    {
+        return 15000;
+    }
+    if(boxType.includes("lolbox.mega"))
+    {
+        return 1500;
+    }
+    if(boxType.includes("lolbox.lite"))
+    {
+        return 4000;
+    }
+    if(boxType.includes("lolbox.cosmic")) 
+        return 40000;
+    if(boxType.includes("lolbox.supreme"))
+        return 15000;
+    if(boxType.includes("lolbox.massive"))
+        return 5000;
+    return 4;
+}
+function CalculateShards(boxType)
+{
+    if(boxType.includes("lolbox.ultra"))
+    {
+        return 5000;
+    }
+    if(boxType.includes("lolbox.mega"))
+    {
+        return 2500;
+    }
+    if(boxType.includes("lolbox.lite"))
+    {
+        return 750;
+    }
+    if(boxType.includes("lolbox.cosmic")) 
+        return 7000;
+    if(boxType.includes("lolbox.supreme"))
+        return 3000;
+    if(boxType.includes("lolbox.massive"))
+        return 1000;
     return 4;
 }
 function RandomBox(boxType, data)
@@ -38,14 +94,14 @@ function RandomBox(boxType, data)
     const WeaponSkins = JSON.parse(fs.readFileSync("./Helpers/WeaponSkins.json", "utf-8"));
     BoxContainer = [
         {
-            "Amount": Math.floor(Math.random() * 20000),
+            "Amount": Math.floor(Math.random() * CalculateGold(boxType)),
             "RewardType": "LOLCoins"
         }
     ];
     for (let i = 0; i < CalculateCards(boxType); i++) {
         let rand = Math.floor(Math.random() * ChampionsJson.length);
         if (data.Champions.OwnedChampions[ChampionsJson[rand]] != null) {
-            let shards = Math.floor(Math.random() * 200);
+            let shards = Math.floor(Math.random() * CalculateShards(boxType));
             BoxContainer.push({ "ProductID": ChampionsJson[rand], "RewardType": "Blueprints", "Amount": shards });
             data.Champions.ChampionShards[ChampionsJson[rand]] += shards;
         } else {
